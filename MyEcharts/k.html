@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>直升机旋翼载荷识别预测可视化</h1>
+      <div class="dropdown">
+          <a href="#" class="dropdown-toggle">旋翼载荷</a>
+          <div class="dropdown-content">
+             <a href="index.html">主旋翼轴TQ1</a>
+             <a href="a.html">主旋翼轴TQ2</a>
+             <a href="b.html">主旋翼轴BB2PRL</a>
+             <a href="c.html">主桨叶80挥舞</a>
+             <a href="d.html">主桨叶80摆振</a>
+             <a href="e.html">主桨叶1602挥舞</a>
+             <a href="f.html">主桨叶2752挥舞</a>
+             <a href="g.html">主桨叶2752摆振</a>
+             <a href="h.html">主桨叶3441挥舞</a>
+             <a href="i.html">主桨叶4668挥舞</a>
+             <a href="j.html">主桨叶5352挥舞</a>
+             <a href="k.html">主桨叶5352摆振</a>
+             <a href="l.html">阻尼器</a>
+             <a href="m.html">主桨变距拉杆</a>
+          </div>
+      </div>
+      <div class="showTime"></div>
+      <script>
+        var t = null;
+        t = setTimeout(time, 1000); //開始运行
+        function time() {
+          clearTimeout(t); //清除定时器
+          dt = new Date();
+          var y = dt.getFullYear();
+          var mt = dt.getMonth() + 1;
+          var day = dt.getDate();
+          var h = dt.getHours(); //获取时
+          var m = dt.getMinutes(); //获取分
+          var s = dt.getSeconds(); //获取秒
+          document.querySelector(".showTime").innerHTML =
+            "当前时间：" +
+            y +
+            "年" +
+            mt +
+            "月" +
+            day +
+            "日-" +
+            h +
+            "时" +
+            m +
+            "分" +
+            s +
+            "秒";
+          t = setTimeout(time, 1000); //设定定时器，循环运行
+        }
+      </script>
+    </header>
+    <section class="mainbox">
+      <div class="column">
+        <div class="panel bar">
+          <h2>主桨叶5352摆振_模型评估—RMSE</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line">
+          <h2>训练集预测结果与真实值对比</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie">
+          <h2>训练集RMSE样本分布图</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="no">
+          <div class="no-hd">
+            <ul>
+              <li>6999</li>
+              <li>3000</li>
+            </ul>
+          </div>
+          <div class="no-bd">
+            <ul>
+              <li>主桨叶5352摆振_训练集数据量</li>
+              <li>主桨叶5352摆振_测试集数据量</li>
+            </ul>
+          </div>
+        </div>
+        <div class="map">
+          <div class="chart"></div>
+          <div class="map1"></div>
+          <div class="map2"></div>
+          <div class="map3"></div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="panel bar1">
+          <h2>SHAP贡献率-主桨叶5352摆振</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel line1">
+          <h2>测试集预测结果与真实值对比</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+        <div class="panel pie1">
+          <h2>测试集RMSE样本分布图</h2>
+          <div class="chart"></div>
+          <div class="panel-footer"></div>
+        </div>
+      </div>
+    </section>
+    <script src="js/flexible.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/echarts.min.js"></script> 
+    <script src="js/china.js"></script>
+    <script src="js/k.js"></script>
+   
+  </body>
+</html>
