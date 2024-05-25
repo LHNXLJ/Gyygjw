@@ -499,6 +499,34 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // 使用刚指定的配置项和数据显示图表。
     myChart.setOption(option);
+   // 原始数据数组
+    var originalData = [
+      -37.15659487, 100.7139282, -101.6917333, -14.66707692, -110.0030769,
+      22.48951795, -58.66830769, 21.02281026, -49.86806154, 102.1806359,
+      -94.35819487, -10.75585641, -113.9142974, 15.64488205, -55.73489231,
+      19.0672, -42.04562051, 93.38038974, -95.82490256, -24.44512821,
+      -112.4475897, 23.95622564, -55.24598974, 28.35634872, -42.04562051,
+      106.0918564, -94.84709744
+    ];
+
+    // 填充初始数据
+    option.series[0].data = originalData;
+    option.series[1].data = originalData;
+    // 开始滚动
+    var dataIndex = 0;
+    setInterval(function() {
+        // 获取下一个数据索引
+        dataIndex = (dataIndex + 1) % originalData.length;
+        // 更新x轴数据
+        option.xAxis[0].data = originalData.slice(dataIndex).concat(originalData.slice(0, dataIndex));
+        // 更新系列数据
+        option.series.forEach(function(series) {
+            series.data = originalData.slice(dataIndex).concat(originalData.slice(0, dataIndex));
+        });
+        // 更新图表
+        myChart.setOption(option);
+    }, 200); // 每秒更新一次
+
     window.addEventListener("resize", function() {
       myChart.resize();
     });
@@ -617,8 +645,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // 重新把配置好的新数据给实例对象
   myChart.setOption(option);
+   // 开始滚动
+    var originalData = [
+      -83.60233846, -96.31380513, -21.02281026, -119.7811282,
+      19.0672, -59.64611282, 20.04500513, -45.95684103,
+      111.4697846, -96.80270769, -17.11158974, -122.225641
+  ];
+
+  var dataIndex = 0;
+  setInterval(function() {
+      // 获取下一个数据索引
+      dataIndex = (dataIndex + 1) % originalData.length;
+      // 更新数据
+      var newData = [];
+      for (var i = 0; i < originalData.length; i++) {
+          newData.push(originalData[(dataIndex + i) % originalData.length]);
+      }
+      // 更新系列数据
+      option.series.forEach(function(series, index) {
+          series.data = newData;
+      });
+      // 更新图表
+      myChart.setOption(option);
+  }, 200); // 每秒更新一次
+
   window.addEventListener("resize", function() {
-    myChart.resize();
+      myChart.resize();
   });
 })();
 // 饼形图定制
